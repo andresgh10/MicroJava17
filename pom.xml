@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cl.bch.cloud</groupId>
+    <artifactId>ms-prd-cdto-aviso-cobro-bdg</artifactId>
+    <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>ms-prd-cdto-aviso-cobro-bdg</name>
+    <description>Proyecto Spring ms-prd-cdto-aviso-cobro-bdg</description>
+
+    <inceptionYear>2023</inceptionYear>
+
+    <organization>
+        <name>Banco de Chile</name>
+        <url>https://www.bancochile.cl</url>
+    </organization>
+
+    <!-- Agregar las personas que correspondan segun el proyecto -->
+    <contributors>
+        <contributor>
+            <name>Nombre arquitecto</name>
+            <email>arquitecto@bancochile.cl</email>
+            <roles>
+                <role>architect</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Nombre líder Técnico</name>
+            <email>lidertecnico@bancochile.cl</email>
+            <roles>
+                <role>tech-leader</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Nombre product owner</name>
+            <email>productowner@bancochile.cl</email>
+            <roles>
+                <role>product-owner</role>
+            </roles>
+        </contributor>
+    </contributors>
+
+    <properties>
+        <java.version>17</java.version>
+        <snakeyaml.version>2.0</snakeyaml.version>
+        <!--
+        Incluir la property de a continucación con la fabrica responsable, por ejemplo:
+        - Internet Personas
+        - Internet Empresas
+        - Mobile
+        - CDN
+        -->
+        <!--<bch.fabrica></bch.fabrica>-->
+
+        <!--
+        Este proyecto excluye clases y packages solo para cumplir niveles de cobertura
+        Tu proyecto no deberia excluir clases o packages sin una clara justificacion.
+        -->
+        <sonar.coverage.exclusions>**/Application.*, **/config/*.*, **/exceptions/*.*, **/enums/*.*, **/dtos/*.*,
+            **/entities/*.*, **/controllers/ExceptionHandlerController.*, **/services/impl/HelloServiceImpl.*
+        </sonar.coverage.exclusions>
+        <!-- Descomentar para uso de Oracle Credentials Wallet
+        <oracle.ojdbc.version>[19,20)</oracle.ojdbc.version>
+        -->
+        <!--
+        Borrar lineas siguientes al ingresar a rama buid-ci, se utiliza solo para fines de evitar validaciones del
+        codigo demostrativo
+         -->
+        <enforcer.bchrules.fail-version>false</enforcer.bchrules.fail-version>
+        <enforcer.bchrules.fail-changelog>false</enforcer.bchrules.fail-changelog>
+        <enforcer.bchrules.fail-readme>false</enforcer.bchrules.fail-readme>
+        <enforcer.bchrules.fail-fabrica>false</enforcer.bchrules.fail-fabrica>
+    </properties>
+
+    <parent>
+        <groupId>cl.bch.cloud</groupId>
+        <artifactId>bch-ms-parent</artifactId>
+        <version>1.0.5</version>
+        <relativePath/>
+    </parent>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-kubernetes-client-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!--
+        Esta dependencia H2 solo se ha agregado para ejemplos de demostración.
+        DEBE SER BORRADA al momento de empezar el desarrollo.
+        -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.220</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bitbucket.b_c</groupId>
+            <artifactId>jose4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-rsa</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <!-- BCH dependencies -->
+        <dependency>
+            <groupId>cl.bch.cloud</groupId>
+            <artifactId>lib-ms-tracing</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cl.bch.cloud</groupId>
+            <artifactId>lib-ms-rest-error-handler</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cl.bch.cloud.logging</groupId>
+            <artifactId>lib-ms-log-estandar</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cl.bch.cloud.spring</groupId>
+            <artifactId>lib-yaml-property-source</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- Descomentar para utilizar Oracle Credentials Wallet -->
+        <!--
+        <dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>${oracle.ojdbc.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.oracle.ojdbc</groupId>
+                    <artifactId>simplefan</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.oracle.ojdbc</groupId>
+                    <artifactId>ons</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>ucp</artifactId>
+			<version>${oracle.ojdbc.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>oraclepki</artifactId>
+			<version>${oracle.ojdbc.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>osdt_core</artifactId>
+			<version>${oracle.ojdbc.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>osdt_cert</artifactId>
+			<version>${oracle.ojdbc.version}</version>
+		</dependency>
+        -->
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>logback-spring.xml</include>
+                    <include>*.properties</include>
+                    <include>*.yml</include>
+                    <include>*.yaml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+</project>
