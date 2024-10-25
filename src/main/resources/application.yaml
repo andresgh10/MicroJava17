@@ -78,7 +78,7 @@ logging:
   pattern:
     level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
   level:
-    root: DEBUG
+    root: INFO
     io:
       micrometer:
         dynatrace: OFF

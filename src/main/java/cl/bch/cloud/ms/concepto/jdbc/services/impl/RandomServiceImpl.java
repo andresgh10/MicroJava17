@@ -62,6 +62,7 @@ public class RandomServiceImpl implements RandomService {
         } else {
             SecureRandom secureRandom = new SecureRandom();
             int random = secureRandom.nextInt(secureRandom.nextInt(max-min+1)+min);
+            int var2 = 7;
             String message = String.format(okMessage, min, max, random);
 
             RandomGenerated randomGenerated = new RandomGenerated(min, max, random, message, statusMessageOk);

@@ -31,7 +31,7 @@ import org.springframework.context.annotation.PropertySources;
         @PropertySource("classpath:osb.properties"),
         @PropertySource("classpath:rest.properties"),
         @PropertySource("classpath:bbdd.properties"),
-        @PropertySource(value = "classpath:ms-concepto-jdbc.yaml", factory = YamlPropertySourceFactory.class)
+        @PropertySource("classpath:ms-concepto-jdbc.properties")
 })
 public class Application {
 
