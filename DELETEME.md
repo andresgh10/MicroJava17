@@ -46,10 +46,10 @@ Algunas propiedades definidas para Maven en el archivo POM.xml relevantes de men
 - Descriptores y versión del proyecto, utilizando la especificación de [SemVer][semver_url].
 ```xml
 <groupId>cl.bch.cloud</groupId>
-<artifactId>ms-prd-cdto-aviso-cobro-bdg</artifactId>
+<artifactId>ms-concepto-jdbc</artifactId>
 <packaging>jar</packaging>
 <version>0.0.1-SNAPSHOT</version>
-<name>ms-prd-cdto-aviso-cobro-bdg</name>
+<name>ms-concepto-jdbc</name>
 ```
 ---
 - Versión del framework de Spring Boot 3, mediante POM parent Banco de Chile.
@@ -100,7 +100,7 @@ Este archivo de propiedades establece las propiedades que se cargan previo al ar
 ```yml
 spring:
     application:
-        name: ms-prd-cdto-aviso-cobro-bdg
+        name: ms-concepto-jdbc
 ```
 - Establece el nombre de la aplicación. Dada la configuración de la dependencia `spring-cloud-starter-kubernetes-config`, este nombre establece la búsqueda de un 
 [ConfigMap en Kubernetes][kubernetes_configmap_url] con el nombre de la aplicación.
@@ -253,7 +253,7 @@ Para este proyecto, la integración trabaja junto al script SQL ubicado en el ar
 
 Este proyecto incorpora la capacidad de consumir APIs REST mediante [Feign][feign_url] de Spring Cloud. Esta integración de ejemplo se realiza consumiendo el API de pruebas provista por [http://www.jsonschema2pojo.org/](http://www.jsonschema2pojo.org/).
 
-El objeto PostDTO para la integración se define en el package `cl.bch.cloud.ms.prd.cdto.aviso.cobro.bdg.dtos` y la interfaz JsonPlaceHolderClient de Feign en el package `cl.bch.cloud.ms.prd.cdto.aviso.cobro.bdg.restclients`. Finalmente, la ejecución del consumo de un API Rest se ejecuta en la clase `cl.bch.cloud.ms.prd.cdto.aviso.cobro.bdg.repositories.JsonPlaceHolderRepository` como parte del servicio `noGreetings` en la clase `cl.bch.cloud.ms.prd.cdto.aviso.cobro.bdg.services.impl.HelloServiceImpl`.
+El objeto PostDTO para la integración se define en el package `cl.bch.cloud.ms.prd.cdto.aviso.cobro.bdg.dtos` y la interfaz JsonPlaceHolderClient de Feign en el package `cl.bch.cloud.ms.prd.cdto.aviso.cobro.bdg.restclients`. Finalmente, la ejecución del consumo de un API Rest se ejecuta en la clase `repositories.cl.bch.cloud.ms.concepto.jdbc.JsonPlaceHolderRepository` como parte del servicio `noGreetings` en la clase `impl.services.cl.bch.cloud.ms.concepto.jdbc.HelloServiceImpl`.
 
 ---
 ## Estructura
@@ -338,10 +338,10 @@ Ejecutando el empaquetado JAR de Spring Boot con el servidor Tomcat embebido.
 1. Lo primero es realizar los ajustes en el archivo POM.xml de acuerdo a los descriptores del proyecto de acuerdo al desarrollo a iniciar:
     ```xml
     <groupId>cl.bch.cloud</groupId>
-    <artifactId>ms-prd-cdto-aviso-cobro-bdg</artifactId>
+    <artifactId>ms-concepto-jdbc</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ms-prd-cdto-aviso-cobro-bdg</name>
+    <name>ms-concepto-jdbc</name>
     ```
    
 2. En segundo lugar, se deberán eliminar desde el mismo archivo POM.xml aquellas dependencias de las cuales el nuevo desarrollo no hará uso. Muchas de las dependencias de ejemplo se encuentran con comentarios asociados.
