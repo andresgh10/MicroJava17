@@ -1,9 +1,7 @@
 package cl.bch.cloud.ms.concepto.jdbc.services.impl;
 
 import cl.bch.cloud.ms.concepto.jdbc.services.RandomService;
-import cl.bch.cloud.ms.concepto.jdbc.repositories.RandomGeneratedRepository;
 import cl.bch.cloud.ms.concepto.jdbc.dtos.MessageDTO;
-import cl.bch.cloud.ms.concepto.jdbc.entities.RandomGenerated;
 
 import io.micrometer.observation.annotation.Observed;
 
@@ -22,8 +20,6 @@ public class RandomServiceImpl implements RandomService {
 
     private static final Logger logger = LoggerFactory.getLogger(RandomServiceImpl.class);
 
-    private final RandomGeneratedRepository randomGeneratedRepository;
-
     @Value("${properties.randomService.minRandomValue}")
     private int min;
 
@@ -39,10 +35,6 @@ public class RandomServiceImpl implements RandomService {
     @Value("${properties.randomService.errorMessage}")
     private String errorMessage;
 
-    @Autowired
-    public RandomServiceImpl(final RandomGeneratedRepository randomGeneratedRepository) {
-        this.randomGeneratedRepository = randomGeneratedRepository;
-    }
 
     /**
      * Generates a random number between zero and a given max number
@@ -55,18 +47,17 @@ public class RandomServiceImpl implements RandomService {
         if (max < min) {
             String message = String.format(errorMessage, min);
 
-            RandomGenerated randomGenerated = new RandomGenerated(min, max, -1, message, statusMessageNok);
-            this.saveRandomGenerated(randomGenerated);
+            //RandomGenerated randomGenerated = new RandomGenerated(min, max, -1, message, statusMessageNok);
+            //this.saveRandomGenerated(randomGenerated);
 
             return new MessageDTO(statusMessageNok, message);
         } else {
             SecureRandom secureRandom = new SecureRandom();
             int random = secureRandom.nextInt(secureRandom.nextInt(max-min+1)+min);
-            int var2 = 7;
             String message = String.format(okMessage, min, max, random);
 
-            RandomGenerated randomGenerated = new RandomGenerated(min, max, random, message, statusMessageOk);
-            this.saveRandomGenerated(randomGenerated);
+            //RandomGenerated randomGenerated = new RandomGenerated(min, max, random, message, statusMessageOk);
+            //this.saveRandomGenerated(randomGenerated);
 
             return new MessageDTO(statusMessageOk, message);
         }
@@ -77,9 +68,9 @@ public class RandomServiceImpl implements RandomService {
      * @param randomGenerated {@link RandomGenerated} The random number generated
      *                        with its message
      */
-    private void saveRandomGenerated(final RandomGenerated randomGenerated) {
-        randomGeneratedRepository.save(randomGenerated);
-        logger.info("randomGenerated inserted in the Database");
-    }
+/*private void saveRandomGenerated(final RandomGenerated randomGenerated) {
+    randomGeneratedRepository.save(randomGenerated);
+    logger.info("randomGenerated inserted in the Database");
+}*/
 
 }
