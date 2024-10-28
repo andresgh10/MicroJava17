@@ -41,6 +41,8 @@ target/
 target/classes
 /build/
 build/**
+/target
+/target/
 
 # Linters
 infer-out/
@@ -79,3 +81,4 @@ build/
 
 # DS_Store
 .DS_Store
+/target/
