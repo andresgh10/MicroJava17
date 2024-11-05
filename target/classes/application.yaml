@@ -1,6 +1,8 @@
 ######
 # Configuracion Base de Spring
 ######
+timezone:
+  default: America/Santiago
 
 spring:
   application:
@@ -37,6 +39,7 @@ springdoc:
   swagger-ui:
     enabled: true
     try-it-out-enabled: false
+    path: /swagger
 
 ######
 # Configuracion endpoints Actuator
