@@ -1,5 +1,7 @@
 package cl.bch.cloud.ms.concepto.jdbc.services.impl;
 
+import cl.bch.cloud.ms.concepto.jdbc.dtos.CreditosDTO;
+import cl.bch.cloud.ms.concepto.jdbc.dtos.CreditosListDTO;
 import cl.bch.cloud.ms.concepto.jdbc.entities.CreditosEntity;
 import cl.bch.cloud.ms.concepto.jdbc.dtos.MessageDTO;
 import cl.bch.cloud.ms.concepto.jdbc.exceptions.TooManyRequestException;
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Observed
@@ -45,16 +48,29 @@ public class HelloServiceImpl implements HelloService {
      * @return {@link MessageDTO} A simple greeting message
      */
     @Override
-    public MessageDTO greetings() {
+    public CreditosListDTO greetings() {
 
         String sql = "SELECT ALT_ACC_NO, PRODUCT_CODE, ACCOUNT_NUMBER, BRANCH_CODE FROM CLTB_ACCOUNT_APPS_MASTER "+
                 "WHERE CUSTOMER_ID=5621645";
         System.out.println("Query: "+sql);
-         List<CreditosEntity> credito = jdbcTemplate.query(sql,
+         List<CreditosEntity> creditoBD = jdbcTemplate.query(sql,
                 BeanPropertyRowMapper.newInstance(CreditosEntity.class));
-        System.out.println(credito);
-        return new MessageDTO(statusMessageOk, greetingMessage+", TO: "+credito.get(0).getProductCode()+
-                " Llave:"+credito.get(0).getAltAccNo());
+        System.out.println(creditoBD);
+        System.out.println("Cantidad Creditos: "+creditoBD.size());
+        /*return new MessageDTO(statusMessageOk, greetingMessage+", TO: "+credito.get(0).getProductCode()+
+                " Llave:"+credito.get(0).getAltAccNo());*/
+        List<CreditosDTO> creditosListaFinal = new ArrayList<>();
+
+        for (var i=0; i<creditoBD.size(); i++ ){
+            /*Variable debe ir dentro del for ya que se debe iniciar una cada vez que que se itera
+              de caso contrario se mapearea en response el ultimo credito de la BD*/
+            CreditosDTO credito = new CreditosDTO();
+            credito.setLlave(creditoBD.get(i).getAltAccNo());
+            credito.setOficina(creditoBD.get(i).getBranchCode());
+            credito.setTo(creditoBD.get(i).getProductCode());
+            creditosListaFinal.add(i,credito);
+        }
+        return new CreditosListDTO(statusMessageOk,greetingMessage,creditosListaFinal);
     }
 
     /**

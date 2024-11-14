@@ -1,5 +1,6 @@
 package cl.bch.cloud.ms.concepto.jdbc.services;
 
+import cl.bch.cloud.ms.concepto.jdbc.dtos.CreditosListDTO;
 import cl.bch.cloud.ms.concepto.jdbc.dtos.MessageDTO;
 
 public interface HelloService {
@@ -8,7 +9,7 @@ public interface HelloService {
      * Returns a simple greeting text wrapped in a MessageDTO
      * @return {@link MessageDTO} A simple greeting message
      */
-    MessageDTO greetings();
+    CreditosListDTO greetings();
 
     /**
      * This method will always throw a BchException in order to simulate an error

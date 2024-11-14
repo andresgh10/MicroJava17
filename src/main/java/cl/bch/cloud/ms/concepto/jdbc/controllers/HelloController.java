@@ -1,5 +1,6 @@
 package cl.bch.cloud.ms.concepto.jdbc.controllers;
 
+import cl.bch.cloud.ms.concepto.jdbc.dtos.CreditosListDTO;
 import cl.bch.cloud.ms.concepto.jdbc.dtos.MessageDTO;
 import cl.bch.cloud.ms.concepto.jdbc.services.HelloService;
 
@@ -66,10 +67,10 @@ public class HelloController {
                     @ApiResponse(responseCode = "200", description = "Greetings message"),
             })
     @GetMapping("/greetings")
-    public MessageDTO greetings() {
+    public CreditosListDTO greetings() {
         logger.info("greetings - init");
         stdLogger.info("greetings - An example of writing to standard log");
-        MessageDTO controllerResponse = helloService.greetings();
+        CreditosListDTO controllerResponse = helloService.greetings();
         logger.info("greetings - end");
         return controllerResponse;
     }
