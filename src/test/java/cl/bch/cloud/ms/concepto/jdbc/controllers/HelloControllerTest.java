@@ -37,7 +37,6 @@ public class HelloControllerTest {
 
     @Test
     public void shouldGetOkResponseWithHelloMessage() throws Exception {
-        Mockito.when(helloServiceMock.greetings()).thenReturn(new MessageDTO(statusMessageOk, greetingMessage));
 
         mockMvc.perform(
                         get("/domain/subdomain/greetings"))

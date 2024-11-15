@@ -1,5 +1,6 @@
 package cl.bch.cloud.ms.concepto.jdbc.services;
 
+import cl.bch.cloud.ms.concepto.jdbc.dtos.CreditosListDTO;
 import cl.bch.cloud.ms.concepto.jdbc.exceptions.TooManyRequestException;
 import cl.bch.cloud.ms.concepto.jdbc.services.impl.HelloServiceImpl;
 import cl.bch.cloud.ms.concepto.jdbc.dtos.MessageDTO;
@@ -31,10 +32,9 @@ public class HelloServiceTest {
     public void shouldGetHelloMessage()  {
         ReflectionTestUtils.setField(helloService, "statusMessageOk", "OK");
         ReflectionTestUtils.setField(helloService, "greetingMessage", "Greetings from Spring Boot!");
-        MessageDTO serviceResponse = helloService.greetings();
+        CreditosListDTO serviceResponse = helloService.greetings();
 
-        assertThat(serviceResponse.status()).isEqualTo("OK");
-        assertThat(serviceResponse.message()).isEqualTo("Greetings from Spring Boot!");
+        assertThat(serviceResponse.getMessage()).isEqualTo("Greetings from Spring Boot!");
     }
 
     @Test
