@@ -6,15 +6,12 @@ import cl.bch.cloud.ms.concepto.jdbc.entities.CreditosEntity;
 import cl.bch.cloud.ms.concepto.jdbc.dtos.MessageDTO;
 import cl.bch.cloud.ms.concepto.jdbc.exceptions.TooManyRequestException;
 
-import cl.bch.cloud.ms.concepto.jdbc.repositories.CreditosRepository;
+import cl.bch.cloud.ms.concepto.jdbc.repositories.CltbAccountAppMaster;
 import cl.bch.cloud.ms.concepto.jdbc.repositories.JsonPlaceHolderRepository;
 import cl.bch.cloud.ms.concepto.jdbc.services.HelloService;
 import io.micrometer.observation.annotation.Observed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Observed
@@ -30,10 +28,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HelloServiceImpl implements HelloService {
 
+    private CltbAccountAppMaster accountRepo;
+
     private static final Logger logger = LoggerFactory.getLogger(HelloServiceImpl.class);
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    private final JsonPlaceHolderRepository jsonPlaceHolderRepository;
 
     @Value("${properties.helloService.statusMessageOk}")
     private String statusMessageOk;
@@ -41,7 +40,13 @@ public class HelloServiceImpl implements HelloService {
     @Value("${properties.helloService.greetingMessage}")
     private String greetingMessage;
 
-    private final JsonPlaceHolderRepository jsonPlaceHolderRepository;
+    /*se establece para llamar funcionalida de otra clase y declarar variable, en este caso la consulta SQL*/
+    @Autowired
+    public HelloServiceImpl(
+            CltbAccountAppMaster accountRepo, JsonPlaceHolderRepository jsonPlaceHolderRepository) {
+        this.accountRepo = accountRepo;
+        this.jsonPlaceHolderRepository = jsonPlaceHolderRepository;
+    }
 
     /**
      * Returns a simple greeting text wrapped in a MessageDTO
@@ -49,12 +54,7 @@ public class HelloServiceImpl implements HelloService {
      */
     @Override
     public CreditosListDTO greetings() {
-
-        String sql = "SELECT ALT_ACC_NO, PRODUCT_CODE, ACCOUNT_NUMBER, BRANCH_CODE FROM CLTB_ACCOUNT_APPS_MASTER "+
-                "WHERE CUSTOMER_ID=5621645";
-        System.out.println("Query: "+sql);
-         List<CreditosEntity> creditoBD = jdbcTemplate.query(sql,
-                BeanPropertyRowMapper.newInstance(CreditosEntity.class));
+         List<CreditosEntity> creditoBD = this.accountRepo.getAcountInformation();
         System.out.println(creditoBD);
         System.out.println("Cantidad Creditos: "+creditoBD.size());
         /*return new MessageDTO(statusMessageOk, greetingMessage+", TO: "+credito.get(0).getProductCode()+
