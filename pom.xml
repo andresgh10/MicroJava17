@@ -80,6 +80,39 @@
         <relativePath/>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>bch-maven-releases</id>
+            <url>http://nexus.bch.bancodechile.cl:8081/repository/bch-maven-releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>maven-public</id>
+            <url>http://nexus.bch.bancodechile.cl:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>bch-maven-snapshots</id>
+            <url>http://nexus.bch.bancodechile.cl:8081/repository/bch-maven-snapshots/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
 
         <dependency>
