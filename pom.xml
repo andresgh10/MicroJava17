@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>cl.bch.cloud</groupId>
-    <artifactId>ms-concepto-jdbc</artifactId>
+    <artifactId>MicroJava17</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ms-concepto-jdbc</name>
-    <description>Proyecto Spring ms-concepto-jdbc</description>
+    <name>MicroJava17</name>
+    <description>Proyecto Spring MicroJava17</description>
 
     <inceptionYear>2023</inceptionYear>
 
@@ -231,11 +231,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>cl.bch.cloud</groupId>
-            <artifactId>ms-concepto-jdbc</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
 
